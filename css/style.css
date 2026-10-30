@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --brand-pink: #d64586;
+    --brand-light-pink: #ffd7f3;
+    --brand-teal: #19c5b6; 
+    --brand-orange: #f28b22; 
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Custom class for the video modal transition */
+.modal-active {
+    display: flex !important;
+}
+
+/* Hide scrollbar when modal is open to prevent page shifting */
+body.modal-open {
+    overflow: hidden;
+}

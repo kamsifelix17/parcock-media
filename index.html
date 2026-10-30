@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcock Media | Creative Media Agency</title>
+    
+    <!-- Tailwind CSS (For rapid UI development) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- ScrollReveal JS -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased">
+    <!-- Navigation -->
+<!-- Navigation (Updated with Bigger Logo & Spacing) -->
+<nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-100 py-3 md:py-4">
+    <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        
+        <!-- Logo Container (Locked height prevents stretching) -->
+        <a href="#" class="block hover:opacity-95 transition-opacity h-8 md:h-12 w-32 md:w-40 relative flex items-center">
+            <!-- Absolute positioning stops the image padding from affecting the navbar -->
+            <img src="./assets/images/image.png" alt="Parcock Media Logo" class="absolute w-full object-contain scale-[1.5] md:scale-[1.75] origin-left">
+        </a>
+        
+        <!-- Desktop Nav & CTA -->
+        <div class="hidden md:flex items-center gap-8 font-semibold text-sm">
+            <a href="#about" class="text-gray-800 hover:text-[#d64586] transition-colors">About Us</a>
+            <a href="#services" class="text-gray-800 hover:text-[#d64586] transition-colors">Services</a>
+            <a href="#portfolio" class="text-gray-800 hover:text-[#d64586] transition-colors">Portfolio</a>
+            <a href="#contact" class="bg-[#19c5b6] text-white px-7 py-3.5 rounded-full hover:bg-teal-500 transition-all hover:scale-105 shadow-lg shadow-teal-500/30 flex items-center gap-2">
+                Book a Call <i class="bi bi-arrow-up-right"></i>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden text-3xl text-gray-900 focus:outline-none z-50">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section (Updated spacing and typography) -->
+<section class="relative min-h-[105svh] flex items-center justify-center bg-[#0a0a0a] text-white pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
+    <!-- Subtle Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d64586] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
+        
+        <!-- Premium Minimal Tagline -->
+        <span class="reveal-up text-[#19c5b6] font-bold tracking-widest uppercase text-xs md:text-sm mb-6 flex items-center gap-3">
+            <i class="bi bi-camera-reels-fill"></i> Creative Media Agency
+        </span>
+
+        <!-- Massive Balanced Typography (No longer overlaps) -->
+        <h1 class="reveal-up font-extrabold text-5xl sm:text-6xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[1.05] mb-8">
+            Be Seen.<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Be Heard.</span><br>
+            <span class="text-[#d64586]">Be Remembered.</span>
+        </h1>
+
+        <!-- Differentiator Subtext -->
+        <p class="reveal-up text-gray-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+            We create brand films, photography, and social content for businesses in Lagos, taking your story from first idea to final delivery.
+        </p>
+
+        <!-- CTAs -->
+        <div class="reveal-up flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
+            <a href="#services" class="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-colors shadow-lg">
+                Explore Services
+            </a>
+            <!-- Trigger for Video Modal -->
+            <button id="openVideoBtn" data-youtube-id="g-BrHXXsZFs" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-white/5 border border-white/15 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors backdrop-blur-sm group">
+                <i class="bi bi-play-circle-fill text-2xl text-[#19c5b6] group-hover:scale-110 transition-transform"></i> 
+                Watch Showreel
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal (Updated for better bounds & viewports) -->
+<div id="videoModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md hidden items-center justify-center opacity-0 transition-opacity duration-300 p-6">
+    <button id="closeVideoBtn" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-[#d64586] text-4xl transition-all hover:scale-110 z-50">
+        <i class="bi bi-x-circle-fill"></i>
+    </button>
+    
+   <!-- Outer constraints prevent it from taking the entire screen edge-to-edge -->
+    <div class="w-full max-w-4xl max-h-[85vh] relative flex items-center justify-center shadow-2xl rounded-2xl border border-white/10 overflow-hidden">
+        <!-- YouTube Iframe replacement -->
+        <iframe id="promoVideo" class="w-full aspect-video rounded-xl bg-gray-900" src="" title="Parcock Media Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+    <!-- ============================================ -->
+    <!-- PORTFOLIO / PROJECTS SECTION                 -->
+    <!-- ============================================ -->
+    <section id="portfolio" class="py-24 bg-[#f8fafc]">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="reveal-up mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="text-[#d64586] font-bold tracking-widest uppercase text-sm">Our Work</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-2 uppercase tracking-tight text-gray-900">Featured Projects</h2>
+                </div>
+            </div>
+            
+            <div class="columns-1 md:columns-2 gap-8 space-y-8">
+                
+                <!-- Project 1: Joe-J Airport -->
+                <!-- The data-youtube-id is what tells the JavaScript which video to open -->
+                <div class="reveal-up portfolio-item relative rounded-2xl overflow-hidden group break-inside-avoid shadow-lg cursor-pointer bg-white border border-gray-100" data-youtube-id="P-ODN2TPPc0">
+                    <div class="relative overflow-hidden h-[300px] bg-gray-900">
+                        <!-- Pulling the thumbnail directly from YouTube -->
+                        <img src="https://img.youtube.com/vi/P-ODN2TPPc0/hqdefault.jpg" alt="Joe-J Airport Arrivals" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/40 group-hover:bg-[#19c5b6] transition-colors duration-300">
+                                <i class="bi bi-play-fill text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl mb-1 text-gray-900">Joe-J Chauffeurs</h4>
+                        <p class="text-[#19c5b6] text-sm font-bold uppercase tracking-wider mb-6">Commercial Reel</p>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p><strong class="text-gray-900">Brief:</strong> Showcase the premium airport arrival experience for 'IJGBs' landing in Lagos.</p>
+                            <p><strong class="text-gray-900">Delivered:</strong> A cinematic commercial reel highlighting comfort, class, and their hospitality partnerships.</p>
+                            <p><strong class="text-gray-900">Result:</strong> Elevated brand perception and increased luxury booking inquiries.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Ethope Roots -->
+                <div class="reveal-up portfolio-item relative rounded-2xl overflow-hidden group break-inside-avoid shadow-lg cursor-pointer bg-white border border-gray-100" data-youtube-id="GABvwNSIuZ8">
+                    <div class="relative overflow-hidden h-[250px] bg-gray-900">
+                        <!-- Pulling the thumbnail directly from YouTube -->
+                        <img src="https://img.youtube.com/vi/GABvwNSIuZ8/hqdefault.jpg" alt="Ethope Roots Beauty Studio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/40 group-hover:bg-[#d64586] transition-colors duration-300">
+                                <i class="bi bi-play-fill text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl mb-1 text-gray-900">Ethope Roots</h4>
+                        <p class="text-[#d64586] text-sm font-bold uppercase tracking-wider mb-6">Beauty Studio Profile</p>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p><strong class="text-gray-900">Brief:</strong> Capture the aesthetic, vibe, and facilities of the newly launched beauty studio.</p>
+                            <p><strong class="text-gray-900">Delivered:</strong> A smooth, visually engaging walk-through video profile.</p>
+                            <p><strong class="text-gray-900">Result:</strong> Strong social proof leading to increased footfall and local brand visibility.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Econwallets Waitlist -->
+                <div class="reveal-up portfolio-item relative rounded-2xl overflow-hidden group break-inside-avoid shadow-lg cursor-pointer bg-white border border-gray-100" data-youtube-id="SqYObnsRbUc">
+                    <div class="relative overflow-hidden h-[250px] bg-gray-900">
+                        <!-- Pulling the thumbnail directly from YouTube -->
+                        <img src="https://img.youtube.com/vi/SqYObnsRbUc/hqdefault.jpg" alt="Econwallets Waitlist" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/40 group-hover:bg-[#d64586] transition-colors duration-300">
+                                <i class="bi bi-play-fill text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl mb-1 text-gray-900">Econwallets Launch</h4>
+                        <p class="text-[#d64586] text-sm font-bold uppercase tracking-wider mb-6">Social Campaign</p>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p><strong class="text-gray-900">Brief:</strong> Create a fast-paced trend-hook video to drive waitlist signups for a fintech launch.</p>
+                            <p><strong class="text-gray-900">Delivered:</strong> A high-energy social media reel designed for maximum retention.</p>
+                            <p><strong class="text-gray-900">Result:</strong> Successfully engaged the target audience and drove early adoption.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Nourish Ark (Akara) -->
+                <div class="reveal-up portfolio-item relative rounded-2xl overflow-hidden group break-inside-avoid shadow-lg cursor-pointer bg-white border border-gray-100" data-youtube-id="fhccGS0AxZ4">
+                    <div class="relative overflow-hidden h-[300px] bg-gray-900">
+                        <!-- Pulling the thumbnail directly from YouTube -->
+                        <img src="https://img.youtube.com/vi/fhccGS0AxZ4/hqdefault.jpg" alt="Akara Product Showcase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/40 group-hover:bg-[#19c5b6] transition-colors duration-300">
+                                <i class="bi bi-play-fill text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl mb-1 text-gray-900">Nourish Ark Foods</h4>
+                        <p class="text-[#19c5b6] text-sm font-bold uppercase tracking-wider mb-6">Product Videography</p>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p><strong class="text-gray-900">Brief:</strong> Demonstrate the ease of using processed bean flour for frying Akara.</p>
+                            <p><strong class="text-gray-900">Delivered:</strong> Step-by-step product videography showing the clear transformation from pack to plate.</p>
+                            <p><strong class="text-gray-900">Result:</strong> Simplified product education and boosted consumer trust.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- ============================================ -->
+    <!-- ABOUT US SECTION                             -->
+    <!-- ============================================ -->
+    <section id="about" class="py-24 bg-white text-gray-900">
+        <div class="container mx-auto px-6 md:px-12">
+            <!-- Section Header -->
+            <div class="reveal-up mb-12">
+                <span class="text-[#d64586] font-bold tracking-widest uppercase text-sm">Who We Are</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-2 uppercase tracking-tight">The Storytellers</h2>
+            </div>
+            
+            <!-- About Content Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Left Column: Copy -->
+    <div class="reveal-up pr-0 md:pr-10">
+        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 leading-snug">
+            We don't just capture media. <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d64586] to-[#19c5b6]">We craft experiences.</span>
+        </h3>
+        
+        <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+            What sets Parcock Media apart is our storytelling-driven approach and our deep involvement throughout the entire creative process, from conceptualization to final execution.
+        </p>
+        
+        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+            We combine creativity, strategic thinking, and professional media production to help brands clearly communicate their value and genuinely connect with their audiences.
+        </p>
+        
+        <!-- Trust Indicators / Bullet Points -->
+        <ul class="space-y-4 font-medium text-gray-800">
+            <li class="flex items-center gap-3">
+                <i class="bi bi-check-circle-fill text-[#19c5b6]"></i> Storytelling-Driven Approach
+            </li>
+            <li class="flex items-center gap-3">
+                <i class="bi bi-check-circle-fill text-[#19c5b6]"></i> End-to-End Creative Execution
+            </li>
+            <li class="flex items-center gap-3">
+                <i class="bi bi-check-circle-fill text-[#19c5b6]"></i> Strategic Brand Positioning
+            </li>
+        </ul>
+    </div>
+
+    <!-- Right Column: Visual / Image Grid -->
+    <!-- This uses an offset design to look premium and agency-like -->
+    <div class="reveal-up relative h-[500px] w-full rounded-2xl overflow-hidden group">
+        <!-- Main Image Placeholder (Replace src with actual team/about image from assets) -->
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Parcock Media Creative Team" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        
+        <!-- Overlay Gradient for contrast -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        
+        <!-- Accent Box (Using Brand Pink) -->
+        <div class="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl text-white">
+            <p class="font-bold text-xl mb-1">Built for Growth</p>
+            <p class="text-white/80 text-sm">Helping organizations trust our capabilities and take the next step.</p>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SERVICES SECTION (Ratedby10 Grid Style)      -->
+    <!-- ============================================ -->
+    <section id="services" class="py-24 bg-[#f8fafc]">
+        <div class="container mx-auto px-6 md:px-12">
+            <!-- Section Header -->
+            <div class="reveal-up mb-16 md:text-center flex flex-col md:items-center">
+                <span class="text-[#19c5b6] font-bold tracking-widest uppercase text-sm">What We Do</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-2 uppercase tracking-tight text-gray-900">Our Expertise</h2>
+            </div>
+            
+            <!-- Services Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Service 1: Videography -->
+    <div class="reveal-up bg-white p-8 rounded-2xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-[#19c5b6] hover:-translate-y-2 transition-all duration-300 group">
+        <div class="w-14 h-14 bg-[#f8fafc] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#19c5b6]/10 transition-colors">
+            <i class="bi bi-camera-reels text-2xl text-gray-900 group-hover:text-[#19c5b6] transition-colors"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Professional Videography</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">
+            High-end video production tailored to capture your brand's essence and tell your story visually.
+        </p>
+    </div>
+
+    <!-- Service 2: Photography -->
+    <div class="reveal-up bg-white p-8 rounded-2xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-[#d64586] hover:-translate-y-2 transition-all duration-300 group" style="transition-delay: 100ms;">
+        <div class="w-14 h-14 bg-[#f8fafc] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#d64586]/10 transition-colors">
+            <i class="bi bi-camera text-2xl text-gray-900 group-hover:text-[#d64586] transition-colors"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Photography</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">
+            Striking, high-resolution imagery designed to build trust, showcase your work, and elevate your visual identity.
+        </p>
+    </div>
+
+    <!-- Service 3: Content Creation -->
+    <div class="reveal-up bg-white p-8 rounded-2xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-[#19c5b6] hover:-translate-y-2 transition-all duration-300 group" style="transition-delay: 200ms;">
+        <div class="w-14 h-14 bg-[#f8fafc] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#19c5b6]/10 transition-colors">
+            <i class="bi bi-magic text-2xl text-gray-900 group-hover:text-[#19c5b6] transition-colors"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Content Creation</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">
+            Engaging, purpose-driven content crafted specifically to resonate with your target audience and drive conversions.
+        </p>
+    </div>
+
+    <!-- Service 4: Social Media Management -->
+    <div class="reveal-up bg-white p-8 rounded-2xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-[#d64586] hover:-translate-y-2 transition-all duration-300 group">
+        <div class="w-14 h-14 bg-[#f8fafc] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#d64586]/10 transition-colors">
+            <i class="bi bi-phone text-2xl text-gray-900 group-hover:text-[#d64586] transition-colors"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Strategic Social Media Management</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">
+            Comprehensive management of your digital presence to ensure consistent brand messaging and community growth.
+        </p>
+    </div>
+
+    <!-- Service 5: Video Editing & Post-Production -->
+    <div class="reveal-up bg-white p-8 rounded-2xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-[#19c5b6] hover:-translate-y-2 transition-all duration-300 group" style="transition-delay: 100ms;">
+        <div class="w-14 h-14 bg-[#f8fafc] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#19c5b6]/10 transition-colors">
+            <i class="bi bi-display text-2xl text-gray-900 group-hover:text-[#19c5b6] transition-colors"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Video Editing & Post-Production</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">
+            Professional editing, color grading, and sound design to turn raw footage into cinematic masterpieces.
+        </p>
+    </div>
+
+    <!-- Lead Gen / Call to Action Card -->
+    <div class="reveal-up bg-[#0a0a0a] p-8 rounded-2xl shadow-xl flex flex-col justify-center items-start group" style="transition-delay: 200ms;">
+        <h3 class="text-2xl font-bold text-white mb-4">Ready to stand out?</h3>
+        <p class="text-gray-400 mb-6 text-sm">Let's discuss how we can build visibility and lasting recognition for your brand.</p>
+        <a href="#contact" class="bg-white text-black px-6 py-3 rounded-full font-bold text-sm hover:bg-[#19c5b6] hover:text-white transition-colors flex items-center gap-2">
+            Start a Project <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTACT / CTA SECTION                        -->
+    <!-- ============================================ -->
+    <section id="contact" class="py-24 bg-[#0a0a0a] text-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Left: Contact Details Container -->
+<div class="reveal-up flex flex-col justify-center">
+    <span class="text-[#19c5b6] font-bold tracking-widest uppercase text-sm mb-2 flex items-center gap-2">
+        <i class="bi bi-chat-dots-fill"></i> Get in Touch
+    </span>
+    <h2 class="text-4xl md:text-6xl font-extrabold mt-2 mb-8 uppercase tracking-tight leading-none">
+        Let's Build <br>Something <span class="text-[#d64586]">Great.</span>
+    </h2>
+    
+    <p class="text-gray-400 mb-10 max-w-md text-lg leading-relaxed">
+        Ready to elevate your brand? Reach out to discuss your next big project.
+    </p>
+
+    <div class="space-y-6">
+        <!-- Phone -->
+        <a href="tel:09064456056" class="flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#19c5b6] group-hover:bg-[#19c5b6] group-hover:text-white transition-colors">
+                <i class="bi bi-telephone-fill text-xl"></i>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Call Us</p>
+                <p class="text-white font-medium text-lg">09064456056</p>
+            </div>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:parcockmedia@gmail.com" class="flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#d64586] group-hover:bg-[#d64586] group-hover:text-white transition-colors">
+                <i class="bi bi-envelope-fill text-xl"></i>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email Us</p>
+                <p class="text-white font-medium text-lg">parcockmedia@gmail.com</p>
+            </div>
+        </a>
+
+        <!-- Location -->
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white">
+                <i class="bi bi-geo-alt-fill text-xl"></i>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Location</p>
+                <p class="text-white font-medium text-lg">Lagos, Nigeria (Available for travels)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Right: WhatsApp/Booking Form Container -->
+<div class="reveal-up bg-[#141414] p-8 md:p-10 rounded-2xl border border-white/5 shadow-2xl">
+    <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
+    <form id="whatsappForm" class="space-y-6">
+        
+        <!-- Name Input -->
+        <div>
+            <label for="waName" class="block text-xs text-gray-500 uppercase tracking-wider font-semibold mb-2">Your Name</label>
+            <input type="text" id="waName" required placeholder="John Doe" class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-[#19c5b6] transition-colors placeholder:text-gray-700">
+        </div>
+
+        <!-- Service Selection -->
+        <div>
+            <label for="waService" class="block text-xs text-gray-500 uppercase tracking-wider font-semibold mb-2">Service of Interest</label>
+            <select id="waService" required class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-[#19c5b6] transition-colors appearance-none cursor-pointer">
+                <option value="" disabled selected class="text-gray-900">Select a service...</option>
+                <option value="Videography" class="text-gray-900">Videography</option>
+                <option value="Photography" class="text-gray-900">Photography</option>
+                <option value="Content Creation" class="text-gray-900">Content Creation</option>
+                <option value="Social Media Management" class="text-gray-900">Social Media Management</option>
+                <option value="Video Editing" class="text-gray-900">Video Editing</option>
+            </select>
+        </div>
+
+        <!-- Message Textarea -->
+        <div>
+            <label for="waMessage" class="block text-xs text-gray-500 uppercase tracking-wider font-semibold mb-2">Project Details</label>
+            <textarea id="waMessage" required rows="4" placeholder="Tell us a bit about your brand and what you want to achieve..." class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-[#d64586] transition-colors placeholder:text-gray-700 resize-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1da851] text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/20">
+            <i class="bi bi-whatsapp text-xl"></i> Let's Talk on WhatsApp
+        </button>
+    </form>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- DETAILED FOOTER                              -->
+    <!-- ============================================ -->
+    <footer class="bg-black text-white pt-16 pb-8 border-t border-white/10">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <!-- Branding -->
+                <div>
+                    <img src="./assets/images/image.png" alt="Parcock Media Logo" class="w-32 md:w-40 object-contain brightness-0 invert scale-125 md:scale-150 origin-left mb-4">
+                    <p class="text-gray-400 text-sm max-w-xs leading-relaxed mt-4">
+                        A creative media agency built around storytelling. BE SEEN. BE HEARD. BE REMEMBERED.
+                    </p>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-[#19c5b6]">Contact Us</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-center gap-3"><i class="bi bi-geo-alt text-[#d64586]"></i> Lagos, Nigeria (Available for travels)</li>
+                        <li class="flex items-center gap-3"><i class="bi bi-envelope text-[#d64586]"></i> parcockmedia@gmail.com</li>
+                        <li class="flex items-center gap-3"><i class="bi bi-telephone text-[#d64586]"></i> 09064456056</li>
+                    </ul>
+                </div>
+                
+                <!-- Social Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-[#19c5b6]">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/parcockmedia/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#d64586] transition-colors"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@parcockmedia" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-colors"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0077b5] transition-colors"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 Parcock Media. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Website by ImpactDev</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- FLOATING WHATSAPP BUTTON                     -->
+    <!-- ============================================ -->
+    <!-- Fixed to the bottom right for instant inquiries -->
+    <a href="https://wa.me/2349064456056" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform z-40 group">
+        <i class="bi bi-whatsapp text-3xl group-hover:animate-pulse"></i>
+    </a>
+    
+<!-- ============================================ -->
+<!-- MOBILE NAVIGATION OVERLAY                    -->
+<!-- ============================================ -->
+<!-- Added 'flex' and 'pointer-events-none' to ensure perfect centering and smooth fading -->
+<div id="mobileMenu" class="fixed inset-0 bg-white/98 backdrop-blur-xl z-[45] flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300">
+    <a href="#about" class="mobile-link text-3xl font-extrabold text-gray-900 hover:text-[#d64586] transition-colors tracking-tight">About Us</a>
+    <a href="#services" class="mobile-link text-3xl font-extrabold text-gray-900 hover:text-[#d64586] transition-colors tracking-tight">Services</a>
+    <a href="#portfolio" class="mobile-link text-3xl font-extrabold text-gray-900 hover:text-[#d64586] transition-colors tracking-tight">Portfolio</a>
+    <a href="#contact" class="mobile-link text-3xl font-extrabold text-gray-900 hover:text-[#d64586] transition-colors tracking-tight">Contact</a>
+    
+    <!-- Mobile Book a Call CTA -->
+    <a href="#contact" class="mobile-link mt-4 bg-[#19c5b6] text-white px-8 py-4 rounded-full font-bold text-xl hover:bg-teal-500 shadow-lg shadow-teal-500/30 flex items-center gap-2">
+        Book a Call <i class="bi bi-arrow-up-right"></i>
+    </a>
+</div>
+
+    <!-- Calendly Badge Widget (For the "Book a Call" feature) -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    
+    <script src="./js/main.js"></script>
+</body>
+</html>
