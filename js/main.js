@@ -12,66 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Dynamic Video Modal Logic (YouTube Edition) ---
-    const modal = document.getElementById('videoModal');
-    const videoIframe = document.getElementById('promoVideo');
-    const closeBtn = document.getElementById('closeVideoBtn');
-    
-    // Grab all triggers by ID or Class
-    const heroVideoBtn = document.getElementById('openVideoBtn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    
-    const openVideoModal = (youtubeId) => {
-        if(videoIframe && youtubeId) {
-            // Appends ?autoplay=1 to force it to play when opened
-            videoIframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
-        }
-        if(modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('modal-active');
-            document.body.classList.add('modal-open'); 
-            
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modal.classList.add('opacity-100');
-            }, 10);
-        }
-    };
-
-    // Hero Button Listener
-    if (heroVideoBtn) {
-        heroVideoBtn.addEventListener('click', () => {
-            const specificYoutubeId = heroVideoBtn.getAttribute('data-youtube-id');
-            if(specificYoutubeId) openVideoModal(specificYoutubeId);
-        });
-    }
-
-    // Portfolio Items Listener
-    portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const specificYoutubeId = item.getAttribute('data-youtube-id');
-            if(specificYoutubeId) openVideoModal(specificYoutubeId);
-        });
-    });
-
-    // Close logic
-    const closeModal = () => {
-        if(modal) {
-            modal.classList.remove('opacity-100');
-            modal.classList.add('opacity-0');
-            document.body.classList.remove('modal-open');
-            
-            setTimeout(() => {
-                modal.classList.remove('modal-active');
-                modal.classList.add('hidden');
-                // Clear the src so the YouTube video stops playing in the background
-                if(videoIframe) {
-                    videoIframe.src = ""; 
-                }
-            }, 300);
-        }
-    };
-
+    // --- 2. Dynamic Video Modal Logic (Hero Only) ---
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     
     if (modal) {
