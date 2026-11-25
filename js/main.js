@@ -12,18 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Dynamic Video Modal Logic (Hero Only) ---
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.closest('.w-full.max-w-4xl') === null) {
-                closeModal();
-            }
-        });
-    }
-
-    // --- 3. WhatsApp Form Integration ---
+    // --- 2. WhatsApp Form Integration ---
     const whatsappForm = document.getElementById('whatsappForm');
     
     if (whatsappForm) {
@@ -43,41 +32,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. Mobile Navigation Toggle ---
-    const mobileBtn = document.querySelector('button.md\\:hidden'); 
+    // --- 3. Mobile Navigation Toggle ---
+    const mobileBtn = document.getElementById('mobile-menu-btn'); 
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
     let isMenuOpen = false;
 
-    const toggleMenu = () => {
-        isMenuOpen = !isMenuOpen;
+    const setMenuState = (open) => {
+        isMenuOpen = open;
+        if (!mobileBtn || !mobileMenu) return;
+
         if (isMenuOpen) {
             mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-            mobileBtn.innerHTML = '<i class="bi bi-x-lg"></i>'; 
-            document.body.style.overflow = 'hidden'; 
+            mobileBtn.innerHTML = '<i class="bi bi-x-lg"></i>';
+            mobileBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
         } else {
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-            mobileBtn.innerHTML = '<i class="bi bi-list"></i>'; 
+            mobileBtn.innerHTML = '<i class="bi bi-list"></i>';
+            mobileBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         }
     };
 
     if (mobileBtn && mobileMenu) {
-        mobileBtn.addEventListener('click', toggleMenu);
+        mobileBtn.addEventListener('click', () => {
+            setMenuState(!isMenuOpen);
+        });
+
         mobileLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
+            link.addEventListener('click', () => {
+                setMenuState(false);
+            });
         });
     }
 
-    // --- 5. Calendly "Book a Call" Integration ---
-    // Fixed: Uses a valid Vanilla JS method instead of jQuery
+    // --- 4. Calendly "Book a Call" Integration ---
     const allLinksAndButtons = document.querySelectorAll('a, button');
     
     allLinksAndButtons.forEach(btn => {
-        if(btn.textContent.includes('Book a Call')) {
+        if (btn.textContent.includes('Book a Call')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Safety check to ensure Calendly script loaded successfully
                 if (typeof Calendly !== 'undefined') {
                     Calendly.initPopupWidget({ url: 'https://calendly.com/YOUR_CALENDLY_LINK' });
                 } else {
